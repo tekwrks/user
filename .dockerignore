@@ -1,0 +1,15 @@
+.git
+.gitignore
+.dockerignore
+.env
+
+node_modules
+jsconfig.json
+
+combined.log
+error.log
+yarn-error.log
+
+*.vim
+*.un~
+Session.vim

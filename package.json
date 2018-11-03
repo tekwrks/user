@@ -1,0 +1,24 @@
+{
+  "name": "quackup-user",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "WhoMeNope <whomenope@outlook.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-mongodb-session": "^2.0.3",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "helmet": "^3.13.0",
+    "mongoose": "^5.2.3",
+    "node-fetch": "^2.2.0",
+    "passport": "^0.4.0",
+    "winston": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/express-session": "^1.15.11"
+  }
+}
