@@ -36,28 +36,27 @@ require('./sessstore')(session)
 
     // setup users database
     require('./user')().then(User => {
-        // setup passport user session
-        passport.serializeUser(
-          function(user, cb) {
-            logger.debug(`serializing: ${user.displayName}`);
-            cb(null, user._id);
-          });
+      // setup passport user session
+      passport.serializeUser(
+        function(user, cb) {
+          logger.debug(`serializing: ${user.displayName}`);
+          cb(null, user._id);
+        });
 
-        passport.deserializeUser(
-          function(id, cb) {
-            logger.debug(`deserializing: ${id}`);
-            User.findById(id, cb);
-          });
+      passport.deserializeUser(
+        function(id, cb) {
+          logger.debug(`deserializing: ${id}`);
+          User.findById(id, cb);
+        });
 
-        app.use(passport.initialize());
-        app.use(passport.session());
-        logger.info('passport setup');
+      app.use(passport.initialize());
+      app.use(passport.session());
+      logger.info('passport setup');
 
-        // get identity
-        app.get(
-          '/identity',
-          function(req, res) {
-            const user = req.user;
+      // get identity
+      app.get('/identity',
+        function({ user }, res) {
+          if (user && user.displayName) {
             res.send(
               {
                 displayName:      user.displayName,
@@ -65,10 +64,16 @@ require('./sessstore')(session)
               }
             );
           }
-        );
+          else {
+            res
+              .status(401)
+              .send('Not logged in.');
+          }
+        }
+      );
 
-        // start server
-        app.listen(process.env.PORT);
-        logger.info(`listening at localhost:${process.env.PORT}`);
-      });
+      // start server
+      app.listen(process.env.PORT);
+      logger.info(`listening at localhost:${process.env.PORT}`);
+    });
   });
