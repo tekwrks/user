@@ -20,7 +20,7 @@ require('./sessstore')()
 
       // get identity
       app.get('/identity',
-        function(req, res) {
+        function (req, res) {
           if (!req.user) {
             logger.error(`no user found for user id : ${req.userID}`)
             res.status(401).send('Not logged in.')
@@ -29,16 +29,16 @@ require('./sessstore')()
           const user = req.user
           if (user && user.displayName) {
             res.send({
-              displayName:      user.displayName,
-              profileImageUrl:  user.profileImageUrl,
+              displayName: user.displayName,
+              profileImageUrl: user.profileImageUrl || null,
             })
           }
         }
       )
 
       // start server
-      app.listen(process.env.PORT);
-      logger.info(`listening at localhost:${process.env.PORT}`);
+      app.listen(process.env.PORT)
+      logger.info(`listening at localhost:${process.env.PORT}`)
     })
   })
 

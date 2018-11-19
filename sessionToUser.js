@@ -6,15 +6,16 @@ module.exports = (User) => function (req, res, next) {
     ? req.session.passport.user
     : null
 
-  if(!!id) {
+  if (id !== null) {
     req.userID = new mongoose.Types.ObjectId(`${id}`)
     User.findById(req.userID, function (err, user) {
-      if(err) {
+      if (err) {
         logger.debug(err)
         req.user = null
       }
-      else
+      else {
         req.user = user
+      }
 
       logger.debug(`got user : ${user.displayName || null}`)
 

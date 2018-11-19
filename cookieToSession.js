@@ -1,7 +1,7 @@
 const logger = require('./logger')
 
 module.exports = (Session) => function (req, res, next) {
-  signedCookies = (req && req.signedCookies)
+  const signedCookies = (req && req.signedCookies)
     ? req.signedCookies
     : null
 
@@ -9,12 +9,13 @@ module.exports = (Session) => function (req, res, next) {
     const sid = `${signedCookies['connect.sid']}`
     req.sessionID = sid
     Session.findOne({ '_id': sid }, function (err, session) {
-      if(err) {
+      if (err) {
         logger.erro(err)
         req.session = null
       }
-      else
+      else {
         req.session = session.session || null
+      }
 
       logger.debug(`got session : ${sid || null}`)
 

@@ -5,7 +5,8 @@
   "author": "WhoMeNope <whomenope@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "eslint -c .eslintrc.js ./*.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -18,6 +19,12 @@
     "winston": "^3.0.0"
   },
   "devDependencies": {
-    "@types/express-session": "^1.15.11"
+    "@types/express-session": "^1.15.11",
+    "eslint": "^5.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0"
   }
 }
