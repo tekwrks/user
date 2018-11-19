@@ -1,6 +1,6 @@
-const logger = require('./logger.js');
+const logger = require('./logger')
 
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 module.exports = function (url, name) {
   const options = {

@@ -1,79 +1,44 @@
 // setup logger
-const logger = require('./logger.js');
-logger.info('starting up');
+const logger = require('./logger')
 
 // app requires
-const express = require('express');
-const helmet = require('helmet');
-const passport = require('passport');
-const app = express();
-const session = require('express-session');
+const express = require('express')
+const app = express()
 
-app.use(helmet());
-
-app.use(require('body-parser').urlencoded(
-  {
-    extended: true
-  }
-));
+app.use(require('helmet')())
+app.use(require('body-parser').urlencoded({ extended: true }))
+app.use(require('cookie-parser')(process.env.COOKIE_SECRET))
 
 // setup session store
-require('./sessstore')(session)
-  .then(store => {
-    // use the store
-    app.use(session(
-      {
-        secret: process.env.COOKIE_SECRET,
-        store: store,
-        resave: true,
-        saveUninitialized: true,
-        cookie: {
-          // secure: true,
-          maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
-        }
-      }
-    ));
+require('./sessstore')()
+  .then(Session => {
+    app.use(require('./cookieToSession')(Session))
 
     // setup users database
     require('./user')().then(User => {
-      // setup passport user session
-      passport.serializeUser(
-        function(user, cb) {
-          logger.debug(`serializing: ${user.displayName}`);
-          cb(null, user._id);
-        });
-
-      passport.deserializeUser(
-        function(id, cb) {
-          logger.debug(`deserializing: ${id}`);
-          User.findById(id, cb);
-        });
-
-      app.use(passport.initialize());
-      app.use(passport.session());
-      logger.info('passport setup');
+      app.use(require('./sessionToUser')(User))
 
       // get identity
       app.get('/identity',
-        function({ user }, res) {
-          if (user && user.displayName) {
-            res.send(
-              {
-                displayName:      user.displayName,
-                profileImageUrl:  user.profileImageUrl,
-              }
-            );
+        function(req, res) {
+          if (!req.user) {
+            logger.error(`no user found for user id : ${req.userID}`)
+            res.status(401).send('Not logged in.')
           }
-          else {
-            res
-              .status(401)
-              .send('Not logged in.');
+
+          const user = req.user
+          if (user && user.displayName) {
+            res.send({
+              displayName:      user.displayName,
+              profileImageUrl:  user.profileImageUrl,
+            })
           }
         }
-      );
+      )
 
       // start server
       app.listen(process.env.PORT);
       logger.info(`listening at localhost:${process.env.PORT}`);
-    });
-  });
+    })
+  })
+
