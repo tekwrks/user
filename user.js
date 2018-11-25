@@ -7,7 +7,6 @@ const uri = `mongodb://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSW
 module.exports = () => new Promise(function (resolve, reject) {
   // schema
   let userSchema = mongoose.Schema({
-    '_id': mongoose.Schema.Types.ObjectId,
     displayName: String,
     profileImageUrl: String,
     joinedDate: Date,

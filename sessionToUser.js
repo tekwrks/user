@@ -8,6 +8,13 @@ module.exports = (User) => function (req, res, next) {
 
   if (id !== null) {
     req.userID = new mongoose.Types.ObjectId(`${id}`)
+
+    if (!req.userID.isValid) {
+      logger.error(`invalid userID : ${req.userID}`)
+      req.user = null
+      next()
+    }
+
     User.findById(req.userID, function (err, user) {
       if (err) {
         logger.debug(err)
@@ -24,7 +31,9 @@ module.exports = (User) => function (req, res, next) {
   }
   else {
     logger.error(`no session found for sessionID : ${req.sessionID}`)
-    res.status(401).send('Not logged in')
+    res
+      .status(401)
+      .send('Not logged in')
   }
 }
 
