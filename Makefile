@@ -18,7 +18,7 @@ run:
 		-t ${repo}/${name}:${version}
 
 .PHONY:run-noenv
-run:
+run-noenv:
 	docker container run \
 		--rm \
 		--name ${repo}-${name}-dev \
