@@ -14,5 +14,4 @@ before_script:
 
 script:
   - make build
-  - make run-noenv
-  - docker ps -a
+
