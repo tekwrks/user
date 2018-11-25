@@ -9,8 +9,8 @@ app.use(require('helmet')())
 app.use(require('body-parser').urlencoded({ extended: true }))
 app.use(require('cookie-parser')(process.env.COOKIE_SECRET))
 
-// setup session store
-require('./sessstore')()
+// setup session database
+require('./session')()
   .then(Session => {
     app.use(require('./cookieToSession')(Session))
 
