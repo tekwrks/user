@@ -3,8 +3,11 @@
 .dockerignore
 .env
 
+*.test.js
+
 node_modules
 jsconfig.json
+.eslintrc.js
 
 combined.log
 error.log
