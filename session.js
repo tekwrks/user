@@ -1,10 +1,9 @@
 const logger = require('./logger')
 const mongoose = require('mongoose')
-const database = require('./db')
 
 const uri = `mongodb://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_ADDRESS}/${process.env.DATABASE_NAME}`
 
-module.exports = () => new Promise(function (resolve, reject) {
+module.exports = (database) => new Promise(function (resolve, reject) {
   // schema
   let sessionSchema = mongoose.Schema({
     '_id': String,

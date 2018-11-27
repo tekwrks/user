@@ -11,7 +11,7 @@ app.use(require('body-parser').urlencoded({ extended: true }))
 app.use(require('cookie-parser')(process.env.COOKIE_SECRET))
 
 // setup session database
-require('./session')()
+require('./session')(database)
   .then(Session => {
     app.use(require('./cookieToSession')(Session))
 
