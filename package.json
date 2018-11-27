@@ -9,6 +9,13 @@
     "test": "jest",
     "lint": "eslint -c .eslintrc.js ./*.js"
   },
+  "jest": {
+    "modulePaths" : ["./"],
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom" : ["*.js"],
+    "collectCoverage": false,
+    "testRegex": ".*test.js$"
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",

@@ -2,6 +2,7 @@
 const logger = require('./logger')
 
 // app requires
+const database = require('./db')
 const express = require('express')
 const app = express()
 
@@ -15,7 +16,7 @@ require('./session')()
     app.use(require('./cookieToSession')(Session))
 
     // setup users database
-    require('./user')().then(User => {
+    require('./user')(database).then(User => {
       app.use(require('./sessionToUser')(User))
 
       // get identity
