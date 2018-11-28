@@ -1,5 +1,7 @@
 /* eslint-disable */
 
+jest.mock('./logger')
+
 process.env.DATABASE_USER = 'user'
 process.env.DATABASE_PASSWORD = 'password'
 process.env.DATABASE_ADDRESS = 'address'

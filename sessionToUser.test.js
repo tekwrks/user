@@ -1,5 +1,7 @@
 /* eslint-disable */
 
+jest.mock('./logger')
+
 // user db stub
 const UserStub = {
   user: { displayName: "name" },

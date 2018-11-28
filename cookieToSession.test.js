@@ -1,5 +1,7 @@
 /* eslint-disable */
 
+jest.mock('./logger')
+
 // user db stub
 const SessionStub = {
   session: { session: "session" },
