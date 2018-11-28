@@ -10,7 +10,7 @@ module.exports = (Session) => function (req, res, next) {
     req.sessionID = sid
     Session.findOne({ '_id': sid }, function (err, session) {
       if (err) {
-        logger.erro(err)
+        logger.error(err)
         req.session = null
       }
       else {
