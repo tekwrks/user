@@ -52,6 +52,22 @@ test('returns session for valid sessionID - found in db', done => {
   SessionStub.succeed = true
   m(req, res, next)
 })
+test('returns session=null for valid sessionID - found in db, no session', done => {
+  const req = {
+    signedCookies: {
+      'connect.sid': 'sessionID'
+    }
+  }
+  const res = {}
+  const next = function () {
+    expect(req.session).toBe(null)
+    done()
+  }
+
+  SessionStub.session = { session: null }
+  SessionStub.succeed = true
+  m(req, res, next)
+})
 test('returns session=null for invalid sessionID - not found in db', done => {
   const req = {
     signedCookies: {
@@ -64,6 +80,7 @@ test('returns session=null for invalid sessionID - not found in db', done => {
     done()
   }
 
+  SessionStub.session = { session: "session" }
   SessionStub.succeed = false
   m(req, res, next)
 })

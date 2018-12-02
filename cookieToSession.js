@@ -17,7 +17,7 @@ module.exports = (Session) => function (req, res, next) {
         req.session = session.session || null
       }
 
-      logger.debug(`got session : ${sid || null}`)
+      logger.debug(`got session : ${sid}`)
 
       next()
     })
