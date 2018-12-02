@@ -21,10 +21,6 @@ beforeAll(() => {
   return m
 })
 
-test('requires module and sets it up', () => {
-  expect(m).toBeTruthy()
-})
-
 test('sends 401 for no userID found', done => {
   const req = {
     sessionID: "sessionID", // for logger
@@ -71,6 +67,24 @@ test('returns user for valid userID - found in db', done => {
     done()
   }
 
+  UserStub.user = { displayName: "name" }
+  UserStub.succeed = true
+  m(req, res, next)
+})
+test('returns user for valid userID - found in db, but null', done => {
+  const userID = "01234567890123456789ABCD" // valid userID
+  const req = {
+    session: {
+      passport: { user: userID }
+    }
+  }
+  const res = {}
+  const next = function () {
+    expect(req.user.displayName).toBe(null)
+    done()
+  }
+
+  UserStub.user = { displayName: null }
   UserStub.succeed = true
   m(req, res, next)
 })
@@ -87,6 +101,7 @@ test('returns user for valid userID - not found in db', done => {
     done()
   }
 
+  UserStub.user = { displayName: "name" }
   UserStub.succeed = false
   m(req, res, next)
 })
