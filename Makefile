@@ -3,10 +3,13 @@ repo=quackup
 name=user
 version=1.0.0
 
-.PHONY:build
-build:
+build: .image-timestamp
+	@touch .image-timestamp
+
+.image-timestamp: $(wildcard *.js) package.json yarn.lock Dockerfile
 	docker image build \
-		-t ${repo}/${name}:${version} .
+		-t ${repo}/${name}:${version} \
+		.
 
 .PHONY:run
 run:
