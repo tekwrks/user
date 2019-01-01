@@ -22,17 +22,16 @@ require('./session')(database)
       // get identity
       app.get('/identity',
         function (req, res) {
-          if (!req.user) {
-            logger.error(`no user found for user id : ${req.userID}`)
-            res.status(401).send('Not logged in.')
-          }
-
           const user = req.user
           if (user && user.displayName) {
             res.send({
               displayName: user.displayName,
               profileImageUrl: user.profileImageUrl || null,
             })
+          }
+          else {
+            logger.error(`no user found or no displayName : ${req.userID}`)
+            res.status(401).send('Not logged in.')
           }
         }
       )
