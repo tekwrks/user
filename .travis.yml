@@ -4,13 +4,16 @@ language: node_js
 node_js:
   - "8"
 
+install:
+  - npm install -g codecov
+
 services:
   - docker
 
 before_script:
   - yarn
   - yarn lint
-  - yarn test --coverage
+  - yarn test --coverage && codecov
 
 script:
   - make build
