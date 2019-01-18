@@ -2,7 +2,7 @@ sudo: required
 
 language: node_js
 node_js:
-  - "8"
+  - '10'
 
 install:
   - npm install -g codecov
@@ -18,3 +18,6 @@ before_script:
 script:
   - make build
 
+notifications:
+  slack:
+    secure: WMq0fO4wmEBjVgbVFEnEqaoAtx2fIt4bWEZw4aoWsA13M7Vd87D0Jw77jm3Ziw0dy/Sp5qsDSKP7m6yAjqB9kv2gL9h0lTLFYrbw4UIgSmqOKrQU14TmlQaVmnWRMqzcbEI31Q3FNDbJfcZlQt8s8U5rZBLWw+Cay65rICJNjVJNRbtSPfdUK3DCOhO/MB5cnn30YxMceZevUV3mRb5YI+7n5E85/GKrp/JeQqNd37+aWN6FWU7jpTwew1NnbLlxKwB1FfI0mwiXH/vAyI562V8mOLtikWvGMAj3E9ST8qfq3y2NOcBCd3m4ziduciqMSCFCZssLvXq5EXncZ69iDJZ7Vds6I+NJ7OlALc+jITMpLMqjv6PjotbU2nQk8bWQsLhQGaO4ZS7t/tnzkwl7KNVegZTFJgDRod8H6zBUjh+TKl38UBtUG2bHvYibiFAtMOME5yjeEMGQdj8bpvKbbzame8OEO/J1RGBeuQx8SMiSMIg9Tj11TghSnUybFzzPAdrUcK6F9vmP5FjS1Oc2IezGjY6MCto2rx+cDFOHSBvYWgfuWlg9ouVIbDRGGKjnp6mh1X3sqTiUmvTcDGTAVylta2mGlbD0acKzlzKngO2+jGO8sAy3d9ZLpzIOZPvvJgbAbN6KhE2x/kraWrVIC/+qMDEIJFvQ3qL5LLNFlXY=
