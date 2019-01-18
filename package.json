@@ -1,8 +1,8 @@
 {
-  "name": "quackup-user",
+  "name": "user",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "WhoMeNope <whomenope@outlook.com>",
+  "author": "tekwrks <tekwrks@tekwrks.com>",
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
