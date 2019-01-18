@@ -1,8 +1,8 @@
 const logger = require('./logger')
 const mongoose = require('mongoose')
 
-const uri = `mongodb://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_ADDRESS}/${process.env.DATABASE_NAME}`
-if(process.env.DATABASE_OPTIONS && process.env.DATABASE_OPTIONS != '') {
+let uri = `mongodb://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_ADDRESS}/${process.env.DATABASE_NAME}`
+if (process.env.DATABASE_OPTIONS && process.env.DATABASE_OPTIONS !== '') {
   uri += `?${process.env.DATABASE_OPTIONS}`
 }
 
