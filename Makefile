@@ -2,10 +2,7 @@ project=tekwrks
 name=user
 
 .PHONY:build
-build: .image-timestamp
-	@touch .image-timestamp
-
-.image-timestamp: $(wildcard *.js) package.json yarn.lock Dockerfile
+build:
 	docker image build \
 		-t ${project}/${name}:latest \
 		.
